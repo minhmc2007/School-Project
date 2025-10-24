@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {%csrf_token%}
+    <h1>THIS IS A TEST WEB PAGE</h1>
+    <label>TEST_API RESULT: </label>
+    <label id="dat"></label>
+    <script>
+        csrf_token = document.getElementById("csrf_token").value
+
+        async function test_api() {
+            res = await fetch("/api/test_api", { method: "POST", headers: { 'X-CSRFToken': csrf_token }, body: JSON.stringify({ name: "yaayy test api", ok: true }) })
+            resj = await res.text()
+
+            dat = document.getElementById("dat")
+            dat.innerHTML = resj
+        }
+
+        test_api()
+    </script>
+</body>
+
+</html>
